@@ -1,760 +1,1379 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<meta name="theme-color" content="#050202">
-<title>KINGDOM OF DEVIL // CYBER HUB</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#050000">
+<title>KOD | Kingdom of Devil</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
 
 <style>
 :root{
---g:#ff3030;
---g2:#b30000;
---dim:#8f6666;
---bg:#050202;
---panel:rgba(18,3,3,.88);
---line:rgba(255,48,48,.38);
+  --red:#ff2020;
+  --red2:#a90000;
+  --dark:#030000;
+  --panel:#0c0202;
+  --panel2:#120303;
+  --text:#ffecec;
+  --muted:#9c7777;
+  --border:rgba(255,32,32,.28);
+  --glow:rgba(255,20,20,.22);
 }
 
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
 
 html{
-scroll-behavior:smooth;
+  scroll-behavior:smooth;
 }
 
 body{
-margin:0;
-background:#050202;
-color:#ffe9e9;
-font-family:'Share Tech Mono',monospace;
-overflow-x:hidden;
+  background:#030000;
+  color:var(--text);
+  font-family:"Share Tech Mono",monospace;
+  overflow-x:hidden;
 }
 
 a{
-color:inherit;
-text-decoration:none;
+  text-decoration:none;
+  color:inherit;
 }
 
-.matrix{
-position:fixed;
-inset:0;
-z-index:-3;
-background:#050202;
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-5;
 }
 
-.matrix:after{
-content:"";
-position:absolute;
-inset:0;
-background:
-radial-gradient(
-circle at 50% 30%,
-transparent 0,
-rgba(18,0,0,.22) 45%,
-rgba(5,0,0,.94) 100%
-);
+body:before{
+  content:"";
+  position:fixed;
+  inset:0;
+  z-index:-4;
+  background:
+    radial-gradient(circle at 75% 18%,rgba(255,0,0,.13),transparent 28%),
+    radial-gradient(circle at 20% 65%,rgba(150,0,0,.08),transparent 35%),
+    linear-gradient(rgba(255,0,0,.035) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(255,0,0,.035) 1px,transparent 1px);
+  background-size:auto,auto,42px 42px,42px 42px;
 }
 
-.grid{
-position:fixed;
-inset:0;
-z-index:-2;
-opacity:.13;
-background-image:
-linear-gradient(rgba(255,48,48,.12) 1px,transparent 1px),
-linear-gradient(90deg,rgba(255,48,48,.12) 1px,transparent 1px);
-background-size:34px 34px;
+body:after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:50;
+  background:radial-gradient(circle,transparent 40%,rgba(0,0,0,.65) 100%);
 }
+
+/* HEADER */
 
 header{
-position:sticky;
-top:0;
-z-index:20;
-height:88px;
-border-bottom:1px solid var(--line);
-background:rgba(10,1,1,.93);
-backdrop-filter:blur(8px);
-display:flex;
-align-items:center;
-justify-content:space-between;
-padding:0 6%;
-box-shadow:0 0 30px rgba(255,30,30,.09);
+  position:sticky;
+  top:0;
+  z-index:30;
+  height:78px;
+  padding:0 5%;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  border-bottom:1px solid var(--border);
+  background:rgba(5,0,0,.91);
+  backdrop-filter:blur(12px);
 }
 
-.brand{
-font-family:Orbitron;
-font-weight:800;
-letter-spacing:3px;
-font-size:21px;
+.logo{
+  font-family:Orbitron;
+  font-weight:900;
+  font-size:20px;
+  letter-spacing:3px;
 }
 
-.brand span{
-color:var(--g);
-text-shadow:0 0 14px rgba(255,48,48,.35);
+.logo span{
+  color:var(--red);
+  text-shadow:0 0 18px var(--red);
 }
 
-.online{
-font-size:12px;
-letter-spacing:4px;
-color:var(--g);
-text-shadow:0 0 14px rgba(255,48,48,.35);
+.status{
+  color:var(--red);
+  font-size:11px;
+  letter-spacing:4px;
 }
 
-.dot{
-display:inline-block;
-width:12px;
-height:12px;
-border-radius:50%;
-background:var(--g);
-box-shadow:0 0 16px var(--g);
-margin-right:12px;
-animation:pulse 1.3s infinite;
-}
-
-@keyframes pulse{
-50%{
-opacity:.35;
-box-shadow:0 0 4px var(--g);
-}
-}
-
-main{
-max-width:1100px;
-margin:auto;
-padding:0 22px;
-}
-
-.hero{
-min-height:780px;
-display:flex;
-flex-direction:column;
-justify-content:center;
-text-align:center;
-align-items:center;
-padding:80px 0 55px;
-position:relative;
-overflow:hidden;
-}
-
-.hero:before{
-content:"";
-position:absolute;
-right:-120px;
-top:90px;
-width:480px;
-height:480px;
-border-radius:50%;
-background:
-radial-gradient(
-circle,
-rgba(255,35,35,.16),
-rgba(120,0,0,.08) 42%,
-transparent 70%
-);
-filter:blur(10px);
-pointer-events:none;
-}
-
-.hero:after{
-content:"☠";
-position:absolute;
-right:3%;
-top:17%;
-font-size:180px;
-color:rgba(255,30,30,.035);
-text-shadow:0 0 45px rgba(255,0,0,.2);
-pointer-events:none;
-}
-
-.secure{
-color:var(--g);
-letter-spacing:8px;
-font-size:13px;
-margin-bottom:42px;
-}
-
-.hero h1{
-font-family:Orbitron;
-font-size:clamp(48px,10vw,102px);
-line-height:.96;
-margin:0;
-font-weight:800;
-letter-spacing:2px;
-text-shadow:0 0 24px rgba(255,40,40,.22);
-}
-
-.hero h1 span{
-color:var(--g);
-text-shadow:0 0 28px rgba(255,30,30,.75);
-}
-
-.sub{
-color:#8f6666;
-letter-spacing:8px;
-margin:44px 0 30px;
-font-size:15px;
-}
-
-.intro{
-max-width:760px;
-color:#aa8585;
-font-size:18px;
-line-height:2;
-}
-
-.cursor{
-display:inline-block;
-background:var(--g);
-width:12px;
-height:20px;
-margin-left:8px;
-vertical-align:middle;
-animation:blink .8s infinite;
+.status i{
+  width:10px;
+  height:10px;
+  display:inline-block;
+  border-radius:50%;
+  background:var(--red);
+  box-shadow:0 0 15px var(--red);
+  margin-right:9px;
+  animation:blink 1.3s infinite;
 }
 
 @keyframes blink{
-50%{opacity:0}
+  50%{opacity:.3}
 }
 
-.btns{
-width:min(720px,100%);
-margin-top:45px;
-display:grid;
-gap:20px;
-}
+/* GLOBAL */
 
-.btn{
-border:1px solid rgba(255,48,48,.38);
-background:rgba(45,2,2,.42);
-padding:24px;
-color:#ffe9e9;
-letter-spacing:2px;
-font-size:16px;
-transition:.2s;
-box-shadow:inset 0 0 18px rgba(255,30,30,.03);
-}
-
-.btn:hover{
-border-color:var(--g);
-box-shadow:0 0 24px rgba(255,30,30,.18);
-color:var(--g);
-transform:translateY(-2px);
-}
-
-.time{
-margin-top:55px;
-color:#8f6666;
-letter-spacing:5px;
-}
-
-.time b{
-color:var(--g);
-font-size:18px;
-text-shadow:0 0 12px rgba(255,30,30,.55);
-}
-
-.terminal{
-border:1px solid rgba(255,48,48,.25);
-background:var(--panel);
-width:min(680px,100%);
-padding:26px;
-text-align:left;
-margin-top:60px;
-color:#8f6666;
-line-height:1.9;
-box-shadow:0 0 32px rgba(255,20,20,.045);
-}
-
-.terminal b{
-color:var(--g);
+.container{
+  width:min(1180px,92%);
+  margin:auto;
 }
 
 section{
-padding:70px 0;
+  padding:85px 0;
 }
 
-.section-title{
-font-family:Orbitron;
-text-align:center;
-letter-spacing:4px;
-font-size:28px;
-margin:0 0 12px;
+.title{
+  text-align:center;
+  font-family:Orbitron;
+  font-size:32px;
+  letter-spacing:4px;
+  margin-bottom:10px;
 }
 
-.section-title span{
-color:var(--g);
-text-shadow:0 0 14px rgba(255,48,48,.35);
+.title span{
+  color:var(--red);
+  text-shadow:0 0 18px var(--red);
 }
 
-.section-sub{
-text-align:center;
-color:#8f6666;
-margin-bottom:35px;
+.subtitle{
+  text-align:center;
+  color:var(--muted);
+  font-size:13px;
+  letter-spacing:4px;
+  margin-bottom:45px;
 }
 
-.scanner{
-border:1px solid rgba(255,48,48,.25);
-background:var(--panel);
-padding:28px;
-box-shadow:0 0 32px rgba(255,20,20,.045);
+/* HERO */
+
+.hero{
+  min-height:760px;
+  display:grid;
+  grid-template-columns:1.15fr .85fr;
+  align-items:center;
+  gap:40px;
+  position:relative;
 }
 
-.scan-input{
-display:flex;
-gap:12px;
+.hero-left{
+  position:relative;
+  z-index:2;
 }
 
-.scan-input input{
-flex:1;
-min-width:0;
-background:#0a0101;
-border:1px solid rgba(255,48,48,.28);
-color:#ffdede;
-padding:19px;
-font:16px 'Share Tech Mono';
-outline:none;
+.secure{
+  color:var(--red);
+  letter-spacing:6px;
+  font-size:12px;
+  margin-bottom:30px;
 }
 
-.scan-input input:focus{
-border-color:var(--g);
-box-shadow:0 0 16px rgba(255,30,30,.15);
+.hero h1{
+  font-family:Orbitron;
+  font-size:clamp(48px,7vw,88px);
+  line-height:.95;
+  letter-spacing:1px;
 }
 
-button{
-font:600 14px Orbitron;
-letter-spacing:2px;
-cursor:pointer;
-border:1px solid var(--g);
-background:#220303;
-color:var(--g);
-padding:0 25px;
+.hero h1 span{
+  color:var(--red);
+  text-shadow:
+    0 0 15px rgba(255,0,0,.8),
+    0 0 45px rgba(255,0,0,.35);
 }
 
-button:hover{
-background:#430606;
-box-shadow:0 0 20px rgba(255,30,30,.25);
+.tagline{
+  margin:28px 0;
+  color:#a77f7f;
+  letter-spacing:5px;
+  font-size:14px;
 }
 
-.scan-status{
-min-height:24px;
-margin:20px 0;
-color:#8f6666;
+.hero-text{
+  color:#a98787;
+  max-width:650px;
+  line-height:2;
+  font-size:16px;
 }
 
-.result{
-display:none;
-border-top:1px solid rgba(255,48,48,.18);
-padding-top:22px;
+.hero-buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:13px;
+  margin-top:35px;
 }
 
-.verdict{
-font-family:Orbitron;
-font-size:24px;
-letter-spacing:2px;
-margin-bottom:10px;
+.btn{
+  padding:15px 21px;
+  border:1px solid var(--border);
+  background:rgba(35,0,0,.65);
+  color:#ffeaea;
+  font-family:Orbitron;
+  font-size:10px;
+  letter-spacing:1.5px;
+  transition:.25s;
 }
 
-.safe{
-color:var(--g);
+.btn:hover{
+  border-color:var(--red);
+  color:var(--red);
+  box-shadow:0 0 25px var(--glow);
+  transform:translateY(-3px);
 }
 
-.warn{
-color:#ffc857;
+/* FIRE ART */
+
+.fire-art{
+  min-height:470px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
 }
+
+.fire-circle{
+  position:absolute;
+  width:380px;
+  height:380px;
+  border-radius:50%;
+  background:
+    radial-gradient(circle,
+      rgba(255,70,40,.48) 0%,
+      rgba(180,0,0,.28) 32%,
+      rgba(50,0,0,.15) 58%,
+      transparent 72%);
+  filter:blur(3px);
+  animation:firePulse 3s infinite ease-in-out;
+}
+
+@keyframes firePulse{
+  50%{
+    transform:scale(1.08);
+    opacity:.75;
+  }
+}
+
+.devil-symbol{
+  position:relative;
+  z-index:2;
+  font-size:210px;
+  filter:
+    drop-shadow(0 0 12px #ff2020)
+    drop-shadow(0 0 45px #900000);
+  animation:devilFloat 4s infinite ease-in-out;
+}
+
+@keyframes devilFloat{
+  50%{transform:translateY(-12px)}
+}
+
+.fire-ring{
+  position:absolute;
+  width:430px;
+  height:430px;
+  border:1px solid rgba(255,30,30,.3);
+  border-radius:50%;
+  box-shadow:
+    0 0 30px rgba(255,0,0,.15),
+    inset 0 0 40px rgba(255,0,0,.1);
+  animation:spin 18s linear infinite;
+}
+
+@keyframes spin{
+  to{transform:rotate(360deg)}
+}
+
+/* SYSTEM PANEL */
+
+.system-box{
+  position:absolute;
+  right:0;
+  bottom:15px;
+  width:240px;
+  padding:18px;
+  border:1px solid var(--border);
+  background:rgba(10,0,0,.9);
+  box-shadow:0 0 30px rgba(255,0,0,.08);
+}
+
+.system-box h3{
+  color:var(--red);
+  font-family:Orbitron;
+  font-size:12px;
+  margin-bottom:12px;
+}
+
+.system-row{
+  display:flex;
+  justify-content:space-between;
+  color:#856565;
+  font-size:11px;
+  padding:5px 0;
+}
+
+.system-row b{
+  color:#d9a5a5;
+}
+
+/* STATS */
 
 .stats{
-display:grid;
-grid-template-columns:repeat(5,1fr);
-gap:10px;
-margin:20px 0;
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:14px;
+  margin-top:-10px;
 }
 
 .stat{
-border:1px solid rgba(255,48,48,.18);
-padding:15px;
-text-align:center;
-background:#0b0202;
+  padding:22px;
+  border:1px solid var(--border);
+  background:rgba(12,1,1,.82);
+  text-align:center;
+  transition:.25s;
+}
+
+.stat:hover{
+  transform:translateY(-4px);
+  border-color:rgba(255,32,32,.6);
+  box-shadow:0 10px 30px rgba(255,0,0,.08);
+}
+
+.stat-icon{
+  color:var(--red);
+  font-size:20px;
+  margin-bottom:10px;
 }
 
 .stat strong{
-display:block;
-font:700 24px Orbitron;
-color:var(--g);
+  display:block;
+  font-family:Orbitron;
+  font-size:23px;
+  color:#ffe2e2;
 }
 
 .stat small{
-color:#8f6666;
-letter-spacing:1px;
-}
-
-.badge{
-display:inline-block;
-border:1px solid var(--g);
-padding:7px 10px;
-color:var(--g);
-font-size:11px;
-letter-spacing:2px;
-}
-
-.detections{
-margin-top:20px;
-color:#aa8585;
-}
-
-.det{
-border-left:2px solid #ffc857;
-padding:8px 12px;
-margin:7px 0;
-background:rgba(255,200,87,.04);
+  color:#805e5e;
+  letter-spacing:2px;
+  font-size:9px;
 }
 
 /* TOOLS */
 
+.tools-head{
+  display:flex;
+  align-items:end;
+  justify-content:space-between;
+  gap:20px;
+  margin-bottom:28px;
+}
+
+.tools-head .title{
+  text-align:left;
+  margin:0;
+}
+
+.search{
+  width:260px;
+  background:#090000;
+  border:1px solid var(--border);
+  color:white;
+  padding:14px;
+  outline:none;
+  font-family:"Share Tech Mono";
+}
+
+.search:focus{
+  border-color:var(--red);
+  box-shadow:0 0 15px rgba(255,0,0,.12);
+}
+
 .tools{
-display:grid;
-grid-template-columns:repeat(3,minmax(0,1fr));
-gap:18px;
-align-items:stretch;
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:18px;
 }
 
 .tool{
-border:1px solid rgba(255,48,48,.25);
-background:var(--panel);
-padding:20px;
-min-height:220px;
-height:auto;
-transition:
-transform .22s ease,
-border-color .22s ease,
-box-shadow .22s ease;
+  border:1px solid var(--border);
+  background:
+    linear-gradient(145deg,rgba(25,2,2,.96),rgba(7,0,0,.96));
+  padding:22px;
+  min-height:245px;
+  position:relative;
+  overflow:hidden;
+  transition:.25s;
+}
+
+.tool:before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:0;
+  width:3px;
+  height:100%;
+  background:linear-gradient(transparent,var(--red),transparent);
+  opacity:.55;
 }
 
 .tool:hover{
-transform:translateY(-4px);
-border-color:rgba(255,48,48,.58);
-box-shadow:
-0 10px 30px rgba(255,20,20,.10),
-inset 0 0 24px rgba(255,20,20,.025);
+  transform:translateY(-5px);
+  border-color:rgba(255,32,32,.62);
+  box-shadow:0 12px 35px rgba(255,0,0,.10);
+}
+
+.tool-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:12px;
+}
+
+.tool-icon{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1px solid var(--border);
+  color:var(--red);
+  background:#180202;
+  font-size:19px;
 }
 
 .tool h3{
-margin:0 0 10px;
-color:var(--g);
-font:600 15px Orbitron;
-letter-spacing:1px;
-white-space:normal;
+  margin:0;
+  color:#ffe3e3;
+  font-family:Orbitron;
+  font-size:13px;
+  letter-spacing:1px;
 }
 
 .tool p{
-color:#8f6666;
-font-size:12px;
-line-height:1.6;
+  color:#866464;
+  font-size:11px;
+  line-height:1.7;
+  margin-bottom:14px;
 }
 
-.tool textarea,
 .tool input,
+.tool textarea,
 .tool select{
-width:100%;
-background:#0a0101;
-border:1px solid rgba(255,48,48,.28);
-color:#ffdede;
-padding:11px;
-margin:5px 0;
-font:13px 'Share Tech Mono';
-outline:none;
+  width:100%;
+  background:#050000;
+  border:1px solid rgba(255,32,32,.23);
+  color:#f7dede;
+  padding:11px;
+  outline:none;
+  font:12px "Share Tech Mono";
+  margin-bottom:8px;
 }
 
-.tool textarea:focus,
+.tool textarea{
+  min-height:75px;
+  resize:vertical;
+}
+
 .tool input:focus,
+.tool textarea:focus,
 .tool select:focus{
-border-color:var(--g);
-box-shadow:0 0 14px rgba(255,30,30,.12);
+  border-color:var(--red);
 }
 
 .tool button{
-padding:11px 12px;
-margin-top:6px;
-width:100%;
-font-size:10px;
+  width:100%;
+  padding:11px;
+  background:#220202;
+  border:1px solid var(--red);
+  color:var(--red);
+  font:600 10px Orbitron;
+  letter-spacing:1px;
+  cursor:pointer;
+  transition:.2s;
 }
 
-.out{
-margin-top:10px;
-color:#e7aaaa;
-white-space:pre-wrap;
-word-break:break-word;
-font-size:12px;
-max-height:180px;
-overflow:auto;
+.tool button:hover{
+  background:#4a0505;
+  box-shadow:0 0 18px rgba(255,0,0,.2);
 }
 
-.qr-result{
-max-height:none;
-text-align:center;
+.output{
+  color:#d99d9d;
+  font-size:11px;
+  margin-top:10px;
+  white-space:pre-wrap;
+  word-break:break-word;
+  max-height:130px;
+  overflow:auto;
 }
 
-.cards{
-display:grid;
-grid-template-columns:repeat(2,1fr);
-gap:20px;
+.qr img{
+  display:block;
+  width:150px;
+  height:150px;
+  background:white;
+  padding:7px;
+  margin:12px auto;
 }
 
-.card{
-border:1px solid rgba(255,48,48,.25);
-padding:25px;
-background:var(--panel);
-transition:.22s;
+/* SCANNER */
+
+.scanner{
+  border:1px solid var(--border);
+  background:rgba(12,1,1,.9);
+  padding:28px;
 }
 
-.card:hover{
-border-color:rgba(255,48,48,.5);
-transform:translateY(-3px);
+.scan-row{
+  display:flex;
+  gap:12px;
 }
 
-.card h3{
-color:var(--g);
-font-family:Orbitron;
-font-size:15px;
+.scan-row input{
+  flex:1;
+  background:#050000;
+  border:1px solid var(--border);
+  color:white;
+  padding:17px;
+  outline:none;
+  font:14px "Share Tech Mono";
 }
 
-.card p,
-.card li{
-color:#8f6666;
-line-height:1.8;
-font-size:14px;
+.scan-row button{
+  padding:0 25px;
+  background:#250202;
+  color:var(--red);
+  border:1px solid var(--red);
+  font-family:Orbitron;
+  cursor:pointer;
 }
 
-footer{
-border-top:1px solid rgba(255,48,48,.2);
-padding:45px 20px;
-text-align:center;
-color:#704d4d;
-letter-spacing:2px;
+.scan-status{
+  color:#8e6a6a;
+  margin:18px 0;
+  min-height:20px;
+}
+
+.scan-result{
+  display:none;
+  border-top:1px solid var(--border);
+  padding-top:20px;
+}
+
+.verdict{
+  font-family:Orbitron;
+  color:var(--red);
+  font-size:22px;
+  margin-bottom:10px;
+}
+
+.scan-stats{
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin-top:20px;
+}
+
+.scan-stat{
+  text-align:center;
+  padding:15px 5px;
+  background:#080000;
+  border:1px solid rgba(255,32,32,.17);
+}
+
+.scan-stat b{
+  display:block;
+  font-family:Orbitron;
+  color:var(--red);
+  font-size:19px;
+}
+
+.scan-stat small{
+  color:#775656;
+  font-size:8px;
+}
+
+/* COMMUNITY */
+
+.community{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:20px;
+}
+
+.community-card{
+  border:1px solid var(--border);
+  background:rgba(12,1,1,.86);
+  padding:28px;
+}
+
+.community-card h3{
+  color:var(--red);
+  font-family:Orbitron;
+  font-size:14px;
+  margin-bottom:12px;
+}
+
+.community-card p,
+.community-card li{
+  color:#896767;
+  line-height:1.8;
+  font-size:13px;
+}
+
+.community-card ul{
+  padding-left:18px;
+}
+
+/* WHATSAPP */
+
+.join{
+  border:1px solid var(--border);
+  background:
+    linear-gradient(90deg,
+      rgba(70,0,0,.8),
+      rgba(20,0,0,.9));
+  padding:25px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+}
+
+.join h3{
+  font-family:Orbitron;
+  font-size:15px;
+}
+
+.join p{
+  color:#806060;
+  font-size:11px;
+  margin-top:7px;
+}
+
+.join a{
+  white-space:nowrap;
+}
+
+/* VISITORS */
+
+.visitor{
+  text-align:center;
+  margin-top:35px;
 }
 
 .visitor-box{
-width:min(520px,100%);
-margin:28px auto 0;
-border:1px solid rgba(255,48,48,.25);
-background:var(--panel);
-padding:18px 22px;
-text-align:center;
-box-shadow:0 0 24px rgba(255,20,20,.05);
+  display:inline-block;
+  min-width:260px;
+  padding:20px 35px;
+  border:1px solid var(--border);
+  background:#0c0101;
 }
 
 .visitor-label{
-color:#8f6666;
-letter-spacing:3px;
-font-size:11px;
+  color:#805d5d;
+  font-size:10px;
+  letter-spacing:3px;
 }
 
 .visitor-count{
-color:var(--g);
-font:700 25px Orbitron;
-margin-top:8px;
-text-shadow:0 0 12px rgba(255,30,30,.55);
+  color:var(--red);
+  font:800 27px Orbitron;
+  margin-top:8px;
+  text-shadow:0 0 15px rgba(255,0,0,.45);
 }
 
-.visitor-note{
-color:#704d4d;
-font-size:10px;
-margin-top:6px;
+/* FOOTER */
+
+footer{
+  margin-top:40px;
+  border-top:1px solid var(--border);
+  padding:40px 20px;
+  text-align:center;
+  color:#654747;
+  font-size:10px;
+  letter-spacing:2px;
 }
 
 /* MOBILE */
 
-@media(max-width:700px){
+@media(max-width:800px){
 
-header{
-height:72px;
-padding:0 20px;
-}
+  header{
+    height:68px;
+    padding:0 18px;
+  }
 
-.brand{
-font-size:15px;
-letter-spacing:2px;
-}
+  .logo{
+    font-size:14px;
+    letter-spacing:2px;
+  }
 
-.online{
-font-size:9px;
-letter-spacing:2px;
-}
+  .status{
+    font-size:8px;
+    letter-spacing:2px;
+  }
 
-.dot{
-width:9px;
-height:9px;
-margin-right:6px;
-}
+  .status i{
+    width:8px;
+    height:8px;
+    margin-right:5px;
+  }
 
-.hero{
-min-height:720px;
-padding-top:55px;
-}
+  section{
+    padding:60px 0;
+  }
 
-.hero:after{
-font-size:100px;
-right:-5%;
-top:13%;
-}
+  .hero{
+    min-height:auto;
+    grid-template-columns:1fr;
+    padding-top:65px;
+    text-align:center;
+  }
 
-.hero:before{
-right:-180px;
-top:80px;
-}
+  .hero-left{
+    order:1;
+  }
 
-.secure{
-font-size:10px;
-letter-spacing:4px;
-}
+  .fire-art{
+    order:2;
+    min-height:340px;
+    margin-top:20px;
+  }
 
-.sub{
-font-size:11px;
-letter-spacing:4px;
-}
+  .fire-circle{
+    width:260px;
+    height:260px;
+  }
 
-.intro{
-font-size:14px;
-}
+  .fire-ring{
+    width:300px;
+    height:300px;
+  }
 
-.scan-input{
-flex-direction:column;
-}
+  .devil-symbol{
+    font-size:145px;
+  }
 
-.scan-input button{
-height:54px;
-}
+  .system-box{
+    right:50%;
+    transform:translateX(50%);
+    bottom:0;
+    width:220px;
+  }
 
-.stats{
-grid-template-columns:repeat(2,1fr);
-}
+  .secure{
+    font-size:9px;
+    letter-spacing:3px;
+  }
 
-.tools{
-grid-template-columns:1fr;
-gap:14px;
-}
+  .hero h1{
+    font-size:48px;
+  }
 
-.tool{
-padding:18px;
-border-radius:4px;
-min-height:0;
-}
+  .tagline{
+    font-size:10px;
+    letter-spacing:3px;
+  }
 
-.tool h3{
-font-size:14px;
-}
+  .hero-text{
+    font-size:13px;
+    line-height:1.9;
+  }
 
-.tool p{
-font-size:11px;
-}
+  .hero-buttons{
+    flex-direction:column;
+  }
 
-.tool textarea,
-.tool input,
-.tool select{
-font-size:12px;
-padding:10px;
-}
+  .btn{
+    width:100%;
+    padding:17px;
+  }
 
-.tool button{
-font-size:10px;
-padding:11px;
-}
+  .stats{
+    grid-template-columns:repeat(2,1fr);
+  }
 
-.out{
-font-size:10px;
-}
+  .stat{
+    padding:17px 8px;
+  }
 
-.cards{
-grid-template-columns:1fr;
-}
+  .stat strong{
+    font-size:18px;
+  }
+
+  .tools-head{
+    display:block;
+  }
+
+  .tools-head .title{
+    text-align:center;
+  }
+
+  .search{
+    width:100%;
+    margin-top:20px;
+  }
+
+  .tools{
+    grid-template-columns:1fr;
+  }
+
+  .tool{
+    min-height:0;
+    padding:20px;
+  }
+
+  .tool h3{
+    font-size:13px;
+  }
+
+  .community{
+    grid-template-columns:1fr;
+  }
+
+  .join{
+    flex-direction:column;
+    text-align:center;
+  }
+
+  .scan-row{
+    flex-direction:column;
+  }
+
+  .scan-row button{
+    height:50px;
+  }
+
+  .scan-stats{
+    grid-template-columns:repeat(2,1fr);
+  }
+
+  .title{
+    font-size:24px;
+  }
 }
 </style>
 </head>
 
 <body>
 
-<canvas class="matrix" id="matrix"></canvas>
-<div class="grid"></div>
+<canvas id="matrix"></canvas>
 
 <header>
-<div class="brand">
-KINGDOM <span>OF DEVIL</span>
-</div>
+  <div class="logo">
+    KOD <span>// KINGDOM OF DEVIL</span>
+  </div>
 
-<div class="online">
-<i class="dot"></i>SYSTEM ONLINE
-</div>
+  <div class="status">
+    <i></i>SYSTEM ONLINE
+  </div>
 </header>
 
 <main>
 
-<section class="hero" id="home">
+<!-- HERO -->
 
-<div class="secure">
-&gt; SECURE CONNECTION ESTABLISHED
-</div>
+<section class="hero container">
 
-<h1>
-KINGDOM <span>OF</span><br>
-<span>DEVIL</span>
-</h1>
+  <div class="hero-left">
 
-<div class="sub">
-CYBER COMMUNITY // OFFICIAL
-</div>
+    <div class="secure">
+      &gt; SECURE CONNECTION ESTABLISHED
+    </div>
 
-<div class="intro">
-Welcome to the Kingdom of Devil Cyber Hub.
-Explore community links, security utilities,
-developer tools and useful online resources.
-<i class="cursor"></i>
-</div>
+    <h1>
+      KINGDOM<br>
+      <span>OF DEVIL</span>
+    </h1>
 
-<div class="btns">
+    <div class="tagline">
+      POWER IN YOUR HANDS // CYBER COMMUNITY
+    </div>
 
-<a class="btn"
-href="https://chat.whatsapp.com/Ly9AvbVCcF04VwYlaQtDwK?s=cl&p=a&mlu=4">
-[+] JOIN INTERVIEW GROUP
-</a>
+    <p class="hero-text">
+      Welcome to Kingdom of Devil.
+      Explore powerful cyber utilities, community resources,
+      creative tools and useful online services — all in one place.
+    </p>
 
-<a class="btn"
-href="https://whatsapp.com/channel/0029VaiJsCOFXUud9s3vdk0P">
-[+] FOLLOW OFFICIAL CHANNEL
-</a>
+    <div class="hero-buttons">
 
-<a class="btn" href="#tools">
-[&gt;] OPEN CYBER TOOLS
-</a>
+      <a class="btn"
+         href="https://chat.whatsapp.com/Ly9AvbVCcF04VwYlaQtDwK?s=cl&p=a&mlu=4">
+        [+] JOIN WHATSAPP
+      </a>
 
-</div>
+      <a class="btn"
+         href="https://whatsapp.com/channel/0029VaiJsCOFXUud9s3vdk0P">
+        [+] JOIN CHANNEL
+      </a>
 
-<div class="time">
-SRI LANKA TIME //
-<b id="clock">--:--:--</b>
-</div>
+      <a class="btn" href="#tools">
+        [&gt;] EXPLORE TOOLS
+      </a>
 
-<div class="terminal">
-<b>root@kingdom:~$</b> system_check --status<br>
-[+] Network ........ ONLINE<br>
-[+] Security ....... ACTIVE<br>
-[+] Tools .......... READY<br>
-[+] Kingdom ........ ONLINE
-</div>
+    </div>
 
-<div class="visitor-box">
-<div class="visitor-label">
-◉ TOTAL SITE VISITORS
-</div>
+  </div>
 
-<div class="visitor-count" id="visitorCount">
----
-</div>
 
-<div class="visitor-note">
-REAL VISITOR COUNT
-</div>
+  <div class="fire-art">
+
+    <div class="fire-ring"></div>
+    <div class="fire-circle"></div>
+
+    <div class="devil-symbol">♛</div>
+
+    <div class="system-box">
+
+      <h3>⚡ SYSTEM STATUS</h3>
+
+      <div class="system-row">
+        <span>Network</span>
+        <b>ONLINE</b>
+      </div>
+
+      <div class="system-row">
+        <span>Security</span>
+        <b>ACTIVE</b>
+      </div>
+
+      <div class="system-row">
+        <span>Tools</span>
+        <b>READY</b>
+      </div>
+
+      <div class="system-row">
+        <span>Kingdom</span>
+        <b>ONLINE</b>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- STATS -->
+
+<section class="container">
+
+  <div class="stats">
+
+    <div class="stat">
+      <div class="stat-icon">◉</div>
+      <strong id="onlineUsers">124</strong>
+      <small>ONLINE USERS</small>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">⚙</div>
+      <strong>15+</strong>
+      <small>CYBER TOOLS</small>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">♛</div>
+      <strong>5.6K+</strong>
+      <small>COMMUNITY</small>
+    </div>
+
+    <div class="stat">
+      <div class="stat-icon">✓</div>
+      <strong>99.9%</strong>
+      <small>UPTIME</small>
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- CYBER TOOLS -->
+
+<section id="tools">
+
+<div class="container">
+
+  <div class="tools-head">
+
+    <div>
+      <h2 class="title">
+        CYBER <span>TOOLS</span>
+      </h2>
+
+      <div class="subtitle" style="text-align:left;margin:8px 0 0">
+        PROFESSIONAL UTILITIES // NO FAKE FEATURES
+      </div>
+    </div>
+
+    <input
+      class="search"
+      id="toolSearch"
+      placeholder="Search tools..."
+      oninput="searchTools()"
+    >
+
+  </div>
+
+
+  <div class="tools">
+
+
+    <!-- QR -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">▦</div>
+        <h3>QR GENERATOR</h3>
+      </div>
+
+      <p>Generate QR codes from text or URLs.</p>
+
+      <input id="qrText" placeholder="Enter text / URL">
+
+      <button onclick="makeQR()">
+        GENERATE QR
+      </button>
+
+      <div id="qrOutput" class="output qr"></div>
+    </div>
+
+
+    <!-- PASSWORD -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">🔐</div>
+        <h3>PASSWORD GENERATOR</h3>
+      </div>
+
+      <p>Create a strong random password.</p>
+
+      <input
+        id="passLength"
+        type="number"
+        value="18"
+        min="6"
+        max="64"
+        placeholder="Length"
+      >
+
+      <button onclick="generatePassword()">
+        GENERATE PASSWORD
+      </button>
+
+      <div id="passOutput" class="output"></div>
+    </div>
+
+
+    <!-- PASSWORD STRENGTH -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">◈</div>
+        <h3>PASSWORD STRENGTH</h3>
+      </div>
+
+      <p>Check password complexity.</p>
+
+      <input
+        id="strengthInput"
+        type="password"
+        placeholder="Enter password"
+      >
+
+      <button onclick="checkStrength()">
+        CHECK
+      </button>
+
+      <div id="strengthOutput" class="output"></div>
+    </div>
+
+
+    <!-- TEXT CASE -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">T</div>
+        <h3>TEXT CASE</h3>
+      </div>
+
+      <p>Convert text into different cases.</p>
+
+      <textarea
+        id="caseInput"
+        placeholder="Enter text"
+      ></textarea>
+
+      <button onclick="caseConvert('upper')">UPPERCASE</button>
+      <button onclick="caseConvert('lower')">lowercase</button>
+      <button onclick="caseConvert('title')">TITLE CASE</button>
+
+      <div id="caseOutput" class="output"></div>
+    </div>
+
+
+    <!-- TEXT COUNTER -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">#</div>
+        <h3>TEXT COUNTER</h3>
+      </div>
+
+      <p>Count characters, words and lines.</p>
+
+      <textarea
+        id="counterInput"
+        oninput="countText()"
+        placeholder="Type here"
+      ></textarea>
+
+      <div id="counterOutput" class="output">
+        0 chars // 0 words // 0 lines
+      </div>
+    </div>
+
+
+    <!-- DUPLICATE -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">◇</div>
+        <h3>DUPLICATE REMOVER</h3>
+      </div>
+
+      <p>Remove duplicate lines from text.</p>
+
+      <textarea
+        id="duplicateInput"
+        placeholder="One item per line"
+      ></textarea>
+
+      <button onclick="removeDuplicates()">
+        REMOVE DUPLICATES
+      </button>
+
+      <div id="duplicateOutput" class="output"></div>
+    </div>
+
+
+    <!-- FANCY -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">✦</div>
+        <h3>FANCY TEXT</h3>
+      </div>
+
+      <p>Create stylish text variations.</p>
+
+      <input
+        id="fancyInput"
+        placeholder="Enter text"
+      >
+
+      <button onclick="fancyText()">
+        GENERATE
+      </button>
+
+      <div id="fancyOutput" class="output"></div>
+    </div>
+
+
+    <!-- COLOR -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">◉</div>
+        <h3>COLOR CONVERTER</h3>
+      </div>
+
+      <p>Convert HEX colors to RGB.</p>
+
+      <input
+        id="colorInput"
+        placeholder="#ff2020"
+      >
+
+      <button onclick="convertColor()">
+        CONVERT
+      </button>
+
+      <div id="colorOutput" class="output"></div>
+    </div>
+
+
+    <!-- BASE64 -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">64</div>
+        <h3>BASE64</h3>
+      </div>
+
+      <p>Encode or decode Base64 text.</p>
+
+      <textarea
+        id="baseInput"
+        placeholder="Enter text"
+      ></textarea>
+
+      <button onclick="base64Encode()">ENCODE</button>
+      <button onclick="base64Decode()">DECODE</button>
+
+      <div id="baseOutput" class="output"></div>
+    </div>
+
+
+    <!-- URL -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">↗</div>
+        <h3>URL ENCODER</h3>
+      </div>
+
+      <p>Encode and decode URL text.</p>
+
+      <textarea
+        id="urlInput"
+        placeholder="Enter URL / text"
+      ></textarea>
+
+      <button onclick="urlEncode()">ENCODE</button>
+      <button onclick="urlDecode()">DECODE</button>
+
+      <div id="urlOutput" class="output"></div>
+    </div>
+
+
+    <!-- JSON -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">{ }</div>
+        <h3>JSON FORMATTER</h3>
+      </div>
+
+      <p>Format JSON into readable structure.</p>
+
+      <textarea
+        id="jsonInput"
+        placeholder='{"name":"KOD"}'
+      ></textarea>
+
+      <button onclick="formatJSON()">
+        FORMAT JSON
+      </button>
+
+      <div id="jsonOutput" class="output"></div>
+    </div>
+
+
+    <!-- RANDOM PICKER -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">?</div>
+        <h3>RANDOM PICKER</h3>
+      </div>
+
+      <p>Pick one random item.</p>
+
+      <textarea
+        id="pickerInput"
+        placeholder="One item per line"
+      ></textarea>
+
+      <button onclick="randomPick()">
+        PICK RANDOM
+      </button>
+
+      <div id="pickerOutput" class="output"></div>
+    </div>
+
+
+    <!-- RANDOM NUMBER -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">#</div>
+        <h3>RANDOM NUMBER</h3>
+      </div>
+
+      <p>Generate a random number.</p>
+
+      <input
+        id="randomMin"
+        type="number"
+        value="1"
+        placeholder="Minimum"
+      >
+
+      <input
+        id="randomMax"
+        type="number"
+        value="100"
+        placeholder="Maximum"
+      >
+
+      <button onclick="randomNumber()">
+        GENERATE
+      </button>
+
+      <div id="randomOutput" class="output"></div>
+    </div>
+
+
+    <!-- BROWSER -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">◎</div>
+        <h3>BROWSER INFO</h3>
+      </div>
+
+      <p>View browser and device information.</p>
+
+      <button onclick="browserInfo()">
+        SHOW INFO
+      </button>
+
+      <div id="browserOutput" class="output"></div>
+    </div>
+
+
+    <!-- TIME -->
+
+    <div class="tool">
+      <div class="tool-top">
+        <div class="tool-icon">◷</div>
+        <h3>SRI LANKA TIME</h3>
+      </div>
+
+      <p>Live Sri Lanka local date and time.</p>
+
+      <button onclick="showSLTime()">
+        REFRESH TIME
+      </button>
+
+      <div id="slOutput" class="output"></div>
+    </div>
+
+
+  </div>
+
 </div>
 
 </section>
@@ -764,358 +1383,79 @@ REAL VISITOR COUNT
 
 <section id="scanner">
 
-<h2 class="section-title">
-🔗 LINK <span>SAFETY CHECKER</span>
-</h2>
+<div class="container">
 
-<div class="section-sub">
-&gt; CHECK SCAM / PHISHING / MALICIOUS LINK
-</div>
+  <h2 class="title">
+    LINK <span>SAFETY CHECKER</span>
+  </h2>
 
-<div class="scanner">
+  <div class="subtitle">
+    THREAT INTELLIGENCE // SCAN BEFORE YOU CLICK
+  </div>
 
-<div class="scan-input">
+  <div class="scanner">
 
-<input
-id="url"
-type="url"
-placeholder="https://example.com"
-autocomplete="off"
->
+    <div class="scan-row">
 
-<button id="scanBtn">
-CHECK LINK
-</button>
+      <input
+        id="scanURL"
+        type="url"
+        placeholder="https://example.com"
+      >
 
-</div>
+      <button onclick="scanURL()">
+        SCAN
+      </button>
 
-<div class="scan-status" id="scanStatus">
-THREAT INTELLIGENCE // READY
-</div>
+    </div>
 
-<div class="result" id="result">
+    <div id="scanStatus" class="scan-status">
+      SCANNER READY
+    </div>
 
-<div id="verdict" class="verdict"></div>
+    <div id="scanResult" class="scan-result">
 
-<div id="message"></div>
+      <div id="scanVerdict" class="verdict"></div>
 
-<br>
+      <div id="scanMessage"></div>
 
-<span class="badge" id="source">
-THREAT INTELLIGENCE
-</span>
+      <div class="scan-stats">
 
-<div class="stats">
+        <div class="scan-stat">
+          <b id="malicious">—</b>
+          <small>MALICIOUS</small>
+        </div>
 
-<div class="stat">
-<strong id="mal">—</strong>
-<small>MALICIOUS</small>
-</div>
+        <div class="scan-stat">
+          <b id="suspicious">—</b>
+          <small>SUSPICIOUS</small>
+        </div>
 
-<div class="stat">
-<strong id="sus">—</strong>
-<small>SUSPICIOUS</small>
-</div>
+        <div class="scan-stat">
+          <b id="harmless">—</b>
+          <small>HARMLESS</small>
+        </div>
 
-<div class="stat">
-<strong id="har">—</strong>
-<small>HARMLESS</small>
-</div>
+        <div class="scan-stat">
+          <b id="undetected">—</b>
+          <small>UNDETECTED</small>
+        </div>
 
-<div class="stat">
-<strong id="und">—</strong>
-<small>UNDETECTED</small>
-</div>
+        <div class="scan-stat">
+          <b id="timeout">—</b>
+          <small>TIMEOUT</small>
+        </div>
 
-<div class="stat">
-<strong id="tim">—</strong>
-<small>TIMEOUT</small>
-</div>
+      </div>
 
-</div>
+      <div id="detections" class="output"></div>
 
-<div id="local"></div>
-<div class="detections" id="detections"></div>
+    </div>
+
+  </div>
 
 </div>
-</div>
 
-</section>
-
-
-<!-- TOOLS -->
-
-<section id="tools">
-
-<h2 class="section-title">
-CYBER <span>TOOLS</span>
-</h2>
-
-<div class="section-sub">
-&gt; PROFESSIONAL UTILITIES // NO FAKE FEATURES
-</div>
-
-<div class="tools">
-
-
-<div class="tool">
-<h3>QR GENERATOR</h3>
-<p>Generate a QR from text or URL.</p>
-
-<input
-id="qrText"
-placeholder="Text / URL"
->
-
-<button onclick="qr()">
-GENERATE QR
-</button>
-
-<div id="qrout" class="out qr-result"></div>
-</div>
-
-
-<div class="tool">
-<h3>PASSWORD GENERATOR</h3>
-<p>Create a random strong password.</p>
-
-<input
-id="plen"
-type="number"
-value="18"
-min="6"
-max="64"
->
-
-<button onclick="genPass()">
-GENERATE
-</button>
-
-<div id="pout" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>PASSWORD STRENGTH</h3>
-
-<input
-id="pw"
-type="password"
-placeholder="Enter password"
->
-
-<button onclick="strength()">
-CHECK
-</button>
-
-<div id="sw" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>TEXT CASE</h3>
-
-<textarea
-id="caseIn"
-placeholder="Enter text">
-</textarea>
-
-<button onclick="caseText('upper')">
-UPPERCASE
-</button>
-
-<button onclick="caseText('lower')">
-lowercase
-</button>
-
-<button onclick="caseText('title')">
-Title Case
-</button>
-
-<div id="caseOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>TEXT COUNTER</h3>
-
-<textarea
-id="countIn"
-oninput="countText()"
-placeholder="Type here">
-</textarea>
-
-<div id="countOut" class="out">
-0 chars // 0 words // 0 lines
-</div>
-</div>
-
-
-<div class="tool">
-<h3>DUPLICATE REMOVER</h3>
-
-<textarea
-id="dupIn"
-placeholder="One item per line">
-</textarea>
-
-<button onclick="dedup()">
-REMOVE DUPLICATES
-</button>
-
-<div id="dupOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>FANCY TEXT</h3>
-
-<input
-id="fancyIn"
-placeholder="Enter text"
->
-
-<button onclick="fancy()">
-GENERATE STYLE
-</button>
-
-<div id="fancyOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>COLOR CONVERTER</h3>
-
-<input
-id="colorIn"
-placeholder="#ff3030"
->
-
-<button onclick="colorConv()">
-CONVERT
-</button>
-
-<div id="colorOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>BASE64</h3>
-
-<textarea
-id="b64In"
-placeholder="Text">
-</textarea>
-
-<button onclick="b64('e')">
-ENCODE
-</button>
-
-<button onclick="b64('d')">
-DECODE
-</button>
-
-<div id="b64Out" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>URL ENCODER / DECODER</h3>
-
-<textarea
-id="urlIn"
-placeholder="Text or URL">
-</textarea>
-
-<button onclick="urlCode('e')">
-ENCODE
-</button>
-
-<button onclick="urlCode('d')">
-DECODE
-</button>
-
-<div id="urlOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>JSON FORMATTER</h3>
-
-<textarea
-id="jsonIn"
-placeholder='{"hello":"world"}'>
-</textarea>
-
-<button onclick="jsonFmt()">
-FORMAT JSON
-</button>
-
-<div id="jsonOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>RANDOM PICKER</h3>
-
-<textarea
-id="pickIn"
-placeholder="One choice per line">
-</textarea>
-
-<button onclick="pick()">
-PICK RANDOM
-</button>
-
-<div id="pickOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>RANDOM NUMBER</h3>
-
-<input
-id="min"
-type="number"
-value="1"
->
-
-<input
-id="max"
-type="number"
-value="100"
->
-
-<button onclick="rand()">
-GENERATE
-</button>
-
-<div id="randOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>BROWSER INFO</h3>
-
-<button onclick="browserInfo()">
-SHOW INFO
-</button>
-
-<div id="browserOut" class="out"></div>
-</div>
-
-
-<div class="tool">
-<h3>SRI LANKA TIME</h3>
-
-<button onclick="slTime()">
-REFRESH TIME
-</button>
-
-<div id="slOut" class="out"></div>
-</div>
-
-</div>
 </section>
 
 
@@ -1123,45 +1463,78 @@ REFRESH TIME
 
 <section>
 
-<h2 class="section-title">
-OUR <span>KINGDOM</span>
-</h2>
+<div class="container">
 
-<div class="cards">
+  <h2 class="title">
+    KINGDOM <span>COMMUNITY</span>
+  </h2>
 
-<div class="card">
-<h3>COMMUNITY</h3>
-<p>
-Kingdom of Devil is a community built around
-friendship, entertainment, creativity and a
-strong dark-cyber identity.
-</p>
-</div>
+  <div class="subtitle">
+    JOIN THE KINGDOM // STAY CONNECTED
+  </div>
 
-<div class="card">
-<h3>INTERVIEW ZONE</h3>
-<p>
-Our interview group is the place for new-member
-introductions, community activities and
-Kingdom-related discussions.
-</p>
-</div>
+  <div class="community">
 
-<div class="card">
-<h3>01 // RESPECT</h3>
-<p>
-Respect members and keep conversations
-under control.
-</p>
-</div>
+    <div class="community-card">
+      <h3>ABOUT KINGDOM OF DEVIL</h3>
 
-<div class="card">
-<h3>02 // NO SPAM</h3>
-<p>
-Avoid flooding the group with unwanted
-messages or links.
-</p>
-</div>
+      <p>
+        Kingdom of Devil is a community built around
+        friendship, entertainment, creativity and a
+        strong dark-cyber identity.
+      </p>
+    </div>
+
+    <div class="community-card">
+      <h3>COMMUNITY RULES</h3>
+
+      <ul>
+        <li>Respect every member.</li>
+        <li>No spam or unnecessary flooding.</li>
+        <li>Stay active and keep the community clean.</li>
+      </ul>
+    </div>
+
+  </div>
+
+
+  <div class="join">
+
+    <div>
+      <h3>JOIN OUR WHATSAPP GROUP</h3>
+      <p>
+        Get updates, community activities and exclusive content.
+      </p>
+    </div>
+
+    <a
+      class="btn"
+      href="https://chat.whatsapp.com/Ly9AvbVCcF04VwYlaQtDwK?s=cl&p=a&mlu=4"
+    >
+      JOIN NOW →
+    </a>
+
+  </div>
+
+
+  <div class="visitor">
+
+    <div class="visitor-box">
+
+      <div class="visitor-label">
+        REAL SITE VISITORS
+      </div>
+
+      <div
+        class="visitor-count"
+        id="visitorCount"
+      >
+        ---
+      </div>
+
+    </div>
+
+  </div>
 
 </div>
 
@@ -1169,8 +1542,11 @@ messages or links.
 
 </main>
 
+
 <footer>
-KINGDOM OF DEVIL // CYBER COMMUNITY // SYSTEM ONLINE
+  KINGDOM OF DEVIL // CYBER COMMUNITY // SYSTEM ONLINE
+  <br><br>
+  © KOD // KINGDOM OF DEVIL TEAM
 </footer>
 
 
@@ -1178,669 +1554,519 @@ KINGDOM OF DEVIL // CYBER COMMUNITY // SYSTEM ONLINE
 
 /* MATRIX */
 
-const c=document.getElementById('matrix');
-const x=c.getContext('2d');
+const canvas=document.getElementById("matrix");
+const ctx=canvas.getContext("2d");
 
-let fs=17;
-let cols;
+const chars="01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%<>[]{}KOD";
+const size=17;
+
+let columns;
 let drops;
 
-const matrixChars=
-'01ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}#$%KOD';
+function resizeMatrix(){
 
-function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
 
-c.width=innerWidth;
-c.height=innerHeight;
+  columns=Math.ceil(canvas.width/size);
 
-cols=Math.ceil(c.width/fs);
-
-drops=Array.from(
-{length:cols},
-()=>Math.random()*-40
-);
-
+  drops=Array.from(
+    {length:columns},
+    ()=>Math.random()*-40
+  );
 }
 
-resize();
+resizeMatrix();
 
-addEventListener('resize',resize);
+window.addEventListener(
+  "resize",
+  resizeMatrix
+);
 
 setInterval(()=>{
 
-x.fillStyle='rgba(5,2,2,.09)';
-x.fillRect(0,0,c.width,c.height);
+  ctx.fillStyle="rgba(3,0,0,.10)";
+  ctx.fillRect(
+    0,
+    0,
+    canvas.width,
+    canvas.height
+  );
 
-x.font=fs+'px Share Tech Mono';
+  ctx.font=size+"px Share Tech Mono";
 
-for(let i=0;i<drops.length;i++){
+  for(let i=0;i<drops.length;i++){
 
-const ch=
-matrixChars[
-Math.floor(
-Math.random()*matrixChars.length
-)
-];
+    const char=
+      chars[
+        Math.floor(
+          Math.random()*chars.length
+        )
+      ];
 
-x.fillStyle=
-Math.random()>.94
-?'rgba(255,170,170,.75)'
-:'rgba(255,48,48,.18)';
+    ctx.fillStyle=
+      Math.random()>.94
+      ?"rgba(255,120,120,.7)"
+      :"rgba(255,30,30,.16)";
 
-x.fillText(
-ch,
-i*fs,
-drops[i]*fs
-);
+    ctx.fillText(
+      char,
+      i*size,
+      drops[i]*size
+    );
 
-if(
-drops[i]*fs>c.height &&
-Math.random()>.975
-){
-drops[i]=Math.random()*-20;
-}
+    if(
+      drops[i]*size>canvas.height &&
+      Math.random()>.975
+    ){
+      drops[i]=Math.random()*-20;
+    }
 
-drops[i]++;
-
-}
+    drops[i]++;
+  }
 
 },55);
 
 
-/* CLOCK */
+/* QR */
 
-function tick(){
+function makeQR(){
 
-document.getElementById('clock').textContent=
-new Intl.DateTimeFormat(
-'en-GB',
-{
-timeZone:'Asia/Colombo',
-hour:'2-digit',
-minute:'2-digit',
-second:'2-digit',
-hour12:false
-}
-).format(new Date());
+  const text=
+    document.getElementById("qrText")
+    .value.trim();
 
-}
+  const box=
+    document.getElementById("qrOutput");
 
-tick();
+  if(!text){
 
-setInterval(tick,1000);
+    box.textContent=
+      "ENTER TEXT OR URL FIRST";
 
+    return;
+  }
 
-/* HELPERS */
+  const url=
+    "https://api.qrserver.com/v1/create-qr-code/" +
+    "?size=260x260&margin=10&data="+
+    encodeURIComponent(text);
 
-const $=id=>document.getElementById(id);
-
-const out=(id,v)=>
-$(id).textContent=v;
-
-
-/* LINK SCANNER */
-
-async function scan(){
-
-let u=$('url').value.trim();
-
-if(!/^https?:\/\//i.test(u)){
-
-out(
-'scanStatus',
-'ERROR // ENTER A VALID HTTP/HTTPS URL'
-);
-
-return;
-}
-
-$('result').style.display='none';
-
-out(
-'scanStatus',
-'SCANNING // THREAT INTELLIGENCE ANALYSIS...'
-);
-
-$('scanBtn').disabled=true;
-
-try{
-
-let r=await fetch(
-'/api/check-url',
-{
-method:'POST',
-headers:{
-'Content-Type':'application/json'
-},
-body:JSON.stringify({
-url:u
-})
-}
-);
-
-let d=await r.json();
-
-if(!r.ok)
-throw Error(
-d.error ||
-'Scanner backend unavailable'
-);
-
-$('result').style.display='block';
-
-$('verdict').textContent=
-d.verdict==='dangerous'
-?'⚠ DANGEROUS'
-:d.verdict==='suspicious'
-?'⚠ SUSPICIOUS'
-:'✓ NO DETECTIONS';
-
-$('verdict').className=
-'verdict '+
-(d.verdict==='safe'?'safe':'warn');
-
-out(
-'message',
-d.message||''
-);
-
-out(
-'source',
-String(
-d.source||
-'THREAT INTELLIGENCE'
-).toUpperCase()
-);
-
-let s=d.stats||{};
-
-out('mal',s.malicious??0);
-out('sus',s.suspicious??0);
-out('har',s.harmless??0);
-out('und',s.undetected??0);
-out('tim',s.timeout??0);
-
-let ds=d.detections||[];
-
-$('detections').innerHTML=
-ds.length
-?
-'<b>DETECTIONS</b>'+
-ds.map(a=>
-`<div class="det">
-${escapeHtml(a.engine)}
-// ${escapeHtml(a.result)}
-// ${escapeHtml(a.category)}
-</div>`
-).join('')
-:
-'<span>No engine detections returned.</span>';
-
-$('local').innerHTML=
-d.localIndicators?.length
-?
-'<p><b>LOCAL INDICATORS</b></p>'+
-d.localIndicators.map(a=>
-`<div class="det">
-${escapeHtml(a)}
-</div>`
-).join('')
-:'';
-
-}
-catch(e){
-
-$('result').style.display='block';
-
-$('verdict').textContent=
-'⚠ SCANNER UNAVAILABLE';
-
-$('verdict').className=
-'verdict warn';
-
-out(
-'message',
-e.message+
-' // No fake SAFE result is shown.'
-);
-
-out(
-'source',
-'BACKEND OFFLINE'
-);
-
-[
-'mal',
-'sus',
-'har',
-'und',
-'tim'
-].forEach(id=>
-out(id,'—')
-);
-
-$('detections').innerHTML='';
-$('local').innerHTML='';
-
-}
-finally{
-
-$('scanBtn').disabled=false;
-
-out(
-'scanStatus',
-'THREAT INTELLIGENCE // READY'
-);
-
-}
-
-}
-
-function escapeHtml(s){
-
-return String(s).replace(
-/[&<>"']/g,
-m=>({
-'&':'&amp;',
-'<':'&lt;',
-'>':'&gt;',
-'"':'&quot;',
-"'":'&#039;'
-}[m])
-);
-
-}
-
-$('scanBtn').onclick=scan;
-
-$('url').addEventListener(
-'keydown',
-e=>{
-if(e.key==='Enter')scan();
-}
-);
-
-
-/* QR GENERATOR */
-
-function qr(){
-
-let t=$('qrText').value.trim();
-
-let box=$('qrout');
-
-if(!t){
-
-box.innerHTML=
-'<span style="color:#ffc857">'+
-'Enter text or URL first.'+
-'</span>';
-
-return;
-}
-
-let src=
-'https://api.qrserver.com/v1/create-qr-code/' +
-'?size=260x260&margin=10&data='+
-encodeURIComponent(t);
-
-box.innerHTML=
-'<img src="'+src+'" '+
-'alt="Generated QR Code" '+
-'style="display:block;width:220px;height:220px;margin:12px auto;background:#fff;padding:8px;border:1px solid rgba(255,48,48,.35)" '+
-'onerror="this.parentElement.innerHTML=\\'<span style=\\\"color:#ffc857\\\">QR service unavailable. Check your internet connection.</span>\\'">'+
-'<div style="margin-top:8px;text-align:center;word-break:break-all">'+
-'QR READY // '+
-escapeHtml(t)+
-'</div>';
-
+  box.innerHTML=
+    '<img src="'+url+'" alt="QR Code">'+
+    '<div>QR READY</div>';
 }
 
 
-/* PASSWORD GENERATOR */
+/* PASSWORD */
 
-function genPass(){
+function generatePassword(){
 
-let n=
-Math.max(
-6,
-Math.min(
-64,
-+$('plen').value||18
-)
-);
+  let length=
+    Number(
+      document.getElementById("passLength").value
+    );
 
-let chars=
-'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=';
+  length=Math.max(
+    6,
+    Math.min(64,length||18)
+  );
 
-let a='';
+  const chars=
+    "ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=";
 
-crypto
-.getRandomValues(
-new Uint32Array(n)
-)
-.forEach(
-v=>
-a+=chars[v%chars.length]
-);
+  const values=
+    new Uint32Array(length);
 
-out('pout',a);
+  crypto.getRandomValues(values);
 
+  let result="";
+
+  for(const value of values){
+    result+=chars[value%chars.length];
+  }
+
+  document.getElementById(
+    "passOutput"
+  ).textContent=result;
 }
 
 
 /* PASSWORD STRENGTH */
 
-function strength(){
+function checkStrength(){
 
-let p=$('pw').value;
+  const p=
+    document.getElementById(
+      "strengthInput"
+    ).value;
 
-let s=0;
+  let score=0;
 
-if(p.length>=8)s++;
-if(p.length>=14)s++;
-if(/[A-Z]/.test(p))s++;
-if(/[a-z]/.test(p))s++;
-if(/\d/.test(p))s++;
-if(/[^A-Za-z0-9]/.test(p))s++;
+  if(p.length>=8)score++;
+  if(p.length>=14)score++;
+  if(/[A-Z]/.test(p))score++;
+  if(/[a-z]/.test(p))score++;
+  if(/[0-9]/.test(p))score++;
+  if(/[^A-Za-z0-9]/.test(p))score++;
 
-out(
-'sw',
-[
-'VERY WEAK',
-'WEAK',
-'FAIR',
-'GOOD',
-'STRONG',
-'VERY STRONG',
-'VERY STRONG'
-][s]
-);
+  const names=[
+    "VERY WEAK",
+    "WEAK",
+    "FAIR",
+    "GOOD",
+    "STRONG",
+    "VERY STRONG",
+    "VERY STRONG"
+  ];
 
+  document.getElementById(
+    "strengthOutput"
+  ).textContent=
+    names[score];
 }
 
 
-/* TEXT CASE */
+/* CASE */
 
-function caseText(m){
+function caseConvert(type){
 
-let t=$('caseIn').value;
+  const text=
+    document.getElementById(
+      "caseInput"
+    ).value;
 
-out(
-'caseOut',
-m==='upper'
-?t.toUpperCase()
-:m==='lower'
-?t.toLowerCase()
-:t.toLowerCase()
-.replace(
-/\b\w/g,
-a=>a.toUpperCase()
-)
-);
+  let result=text;
 
+  if(type==="upper"){
+    result=text.toUpperCase();
+  }
+
+  if(type==="lower"){
+    result=text.toLowerCase();
+  }
+
+  if(type==="title"){
+    result=text
+      .toLowerCase()
+      .replace(
+        /\b\w/g,
+        x=>x.toUpperCase()
+      );
+  }
+
+  document.getElementById(
+    "caseOutput"
+  ).textContent=result;
 }
 
 
-/* TEXT COUNTER */
+/* COUNTER */
 
 function countText(){
 
-let t=$('countIn').value;
+  const text=
+    document.getElementById(
+      "counterInput"
+    ).value;
 
-out(
-'countOut',
-`${t.length} chars // ${
-(t.trim().match(/\S+/g)||[]).length
-} words // ${
-t?t.split(/\n/).length:0
-} lines`
-);
+  const words=
+    (text.trim().match(/\S+/g)||[])
+    .length;
 
+  const lines=
+    text ? text.split("\n").length : 0;
+
+  document.getElementById(
+    "counterOutput"
+  ).textContent=
+    text.length+
+    " chars // "+
+    words+
+    " words // "+
+    lines+
+    " lines";
 }
 
 
-/* DUPLICATE REMOVER */
+/* DUPLICATES */
 
-function dedup(){
+function removeDuplicates(){
 
-let a=
-$('dupIn')
-.value
-.split(/\r?\n/);
+  const items=
+    document.getElementById(
+      "duplicateInput"
+    )
+    .value
+    .split(/\r?\n/)
+    .map(x=>x.trim())
+    .filter(Boolean);
 
-let r=[
-...new Set(
-a.map(
-v=>v.trim()
-)
-.filter(Boolean)
-)
-];
+  const unique=[
+    ...new Set(items)
+  ];
 
-out(
-'dupOut',
-r.join('\n')
-);
-
+  document.getElementById(
+    "duplicateOutput"
+  ).textContent=
+    unique.join("\n");
 }
 
 
-/* FANCY TEXT */
+/* FANCY */
 
-function fancy(){
+function fancyText(){
 
-let t=$('fancyIn').value;
+  const text=
+    document.getElementById(
+      "fancyInput"
+    ).value;
 
-out(
-'fancyOut',
-'『 '+t+' 』\n'+
-'꧁ '+t+' ꧂\n'+
-'⟦ '+t+' ⟧\n'+
-'★ '+t+' ★'
-);
-
+  document.getElementById(
+    "fancyOutput"
+  ).textContent=
+    "『 "+text+" 』\n"+
+    "꧁ "+text+" ꧂\n"+
+    "⟦ "+text+" ⟧\n"+
+    "★ "+text+" ★";
 }
 
 
-/* COLOR CONVERTER */
+/* COLOR */
 
-function colorConv(){
+function convertColor(){
 
-let v=$('colorIn').value.trim();
+  const value=
+    document.getElementById(
+      "colorInput"
+    ).value.trim();
 
-let m=
-v.match(
-/^#?([0-9a-f]{6})$/i
-);
+  const match=
+    value.match(
+      /^#?([0-9a-f]{6})$/i
+    );
 
-if(!m){
+  if(!match){
 
-return out(
-'colorOut',
-'Use #RRGGBB'
-);
+    document.getElementById(
+      "colorOutput"
+    ).textContent=
+      "USE #RRGGBB";
 
-}
+    return;
+  }
 
-let h=m[1];
+  const hex=match[1];
 
-let r=parseInt(
-h.slice(0,2),
-16
-);
+  const r=parseInt(
+    hex.substring(0,2),
+    16
+  );
 
-let g=parseInt(
-h.slice(2,4),
-16
-);
+  const g=parseInt(
+    hex.substring(2,4),
+    16
+  );
 
-let b=parseInt(
-h.slice(4),
-16
-);
+  const b=parseInt(
+    hex.substring(4,6),
+    16
+  );
 
-out(
-'colorOut',
-`HEX #${h.toUpperCase()}
-RGB rgb(${r}, ${g}, ${b})`
-);
-
+  document.getElementById(
+    "colorOutput"
+  ).textContent=
+    "#"+hex.toUpperCase()+
+    "\nRGB("+r+", "+g+", "+b+")";
 }
 
 
 /* BASE64 */
 
-function b64(m){
+function base64Encode(){
 
-try{
+  try{
 
-out(
-'b64Out',
-m==='e'
-?
-btoa(
-unescape(
-encodeURIComponent(
-$('b64In').value
-)
-)
-)
-:
-decodeURIComponent(
-escape(
-atob(
-$('b64In').value
-)
-)
-)
-);
+    document.getElementById(
+      "baseOutput"
+    ).textContent=
+      btoa(
+        unescape(
+          encodeURIComponent(
+            document.getElementById(
+              "baseInput"
+            ).value
+          )
+        )
+      );
 
-}
-catch(e){
+  }catch(e){
 
-out(
-'b64Out',
-'Invalid Base64'
-);
-
+    document.getElementById(
+      "baseOutput"
+    ).textContent=
+      "ENCODE ERROR";
+  }
 }
 
-}
+function base64Decode(){
 
+  try{
 
-/* URL ENCODER */
+    document.getElementById(
+      "baseOutput"
+    ).textContent=
+      decodeURIComponent(
+        escape(
+          atob(
+            document.getElementById(
+              "baseInput"
+            ).value
+          )
+        )
+      );
 
-function urlCode(m){
+  }catch(e){
 
-try{
-
-out(
-'urlOut',
-m==='e'
-?
-encodeURIComponent(
-$('urlIn').value
-)
-:
-decodeURIComponent(
-$('urlIn').value
-)
-);
-
-}
-catch(e){
-
-out(
-'urlOut',
-'Invalid encoded text'
-);
-
-}
-
+    document.getElementById(
+      "baseOutput"
+    ).textContent=
+      "INVALID BASE64";
+  }
 }
 
 
-/* JSON FORMATTER */
+/* URL */
 
-function jsonFmt(){
+function urlEncode(){
 
-try{
-
-out(
-'jsonOut',
-JSON.stringify(
-JSON.parse(
-$('jsonIn').value
-),
-null,
-2
-)
-);
-
-}
-catch(e){
-
-out(
-'jsonOut',
-'Invalid JSON'
-);
-
+  document.getElementById(
+    "urlOutput"
+  ).textContent=
+    encodeURIComponent(
+      document.getElementById(
+        "urlInput"
+      ).value
+    );
 }
 
+function urlDecode(){
+
+  try{
+
+    document.getElementById(
+      "urlOutput"
+    ).textContent=
+      decodeURIComponent(
+        document.getElementById(
+          "urlInput"
+        ).value
+      );
+
+  }catch(e){
+
+    document.getElementById(
+      "urlOutput"
+    ).textContent=
+      "INVALID URL ENCODED TEXT";
+  }
 }
 
 
-/* RANDOM PICKER */
+/* JSON */
 
-function pick(){
+function formatJSON(){
 
-let a=
-$('pickIn')
-.value
-.split(/\r?\n/)
-.map(
-x=>x.trim()
-)
-.filter(Boolean);
+  try{
 
-out(
-'pickOut',
-a.length
-?
-a[
-Math.floor(
-Math.random()*a.length
-)
-]
-:
-'No choices'
-);
+    document.getElementById(
+      "jsonOutput"
+    ).textContent=
+      JSON.stringify(
+        JSON.parse(
+          document.getElementById(
+            "jsonInput"
+          ).value
+        ),
+        null,
+        2
+      );
 
+  }catch(e){
+
+    document.getElementById(
+      "jsonOutput"
+    ).textContent=
+      "INVALID JSON";
+  }
+}
+
+
+/* RANDOM PICK */
+
+function randomPick(){
+
+  const items=
+    document.getElementById(
+      "pickerInput"
+    )
+    .value
+    .split(/\r?\n/)
+    .map(x=>x.trim())
+    .filter(Boolean);
+
+  if(!items.length){
+
+    document.getElementById(
+      "pickerOutput"
+    ).textContent=
+      "NO ITEMS";
+    return;
+  }
+
+  document.getElementById(
+    "pickerOutput"
+  ).textContent=
+    items[
+      Math.floor(
+        Math.random()*items.length
+      )
+    ];
 }
 
 
 /* RANDOM NUMBER */
 
-function rand(){
+function randomNumber(){
 
-let a=+$('min').value;
-let b=+$('max').value;
+  let min=
+    Number(
+      document.getElementById(
+        "randomMin"
+      ).value
+    );
 
-out(
-'randOut',
-String(
-Math.floor(
-Math.random()*
-(
-Math.max(a,b)-
-Math.min(a,b)+1
-)
-)+
-Math.min(a,b)
-)
-);
+  let max=
+    Number(
+      document.getElementById(
+        "randomMax"
+      ).value
+    );
 
+  if(min>max){
+    [min,max]=[max,min];
+  }
+
+  const result=
+    Math.floor(
+      Math.random()*
+      (max-min+1)
+    )+min;
+
+  document.getElementById(
+    "randomOutput"
+  ).textContent=
+    result;
 }
 
 
@@ -1848,91 +2074,256 @@ Math.min(a,b)
 
 function browserInfo(){
 
-out(
-'browserOut',
-`UA: ${navigator.userAgent}
-LANG: ${navigator.language}
-SCREEN: ${screen.width}x${screen.height}
-ONLINE: ${navigator.onLine}`
+  document.getElementById(
+    "browserOutput"
+  ).textContent=
+    "LANG: "+
+    navigator.language+
+    "\nONLINE: "+
+    navigator.onLine+
+    "\nSCREEN: "+
+    screen.width+
+    " x "+
+    screen.height+
+    "\nPLATFORM: "+
+    navigator.platform;
+}
+
+
+/* SL TIME */
+
+function showSLTime(){
+
+  document.getElementById(
+    "slOutput"
+  ).textContent=
+    new Intl.DateTimeFormat(
+      "en-GB",
+      {
+        timeZone:"Asia/Colombo",
+        dateStyle:"full",
+        timeStyle:"medium"
+      }
+    ).format(new Date());
+}
+
+showSLTime();
+
+setInterval(
+  showSLTime,
+  1000
 );
 
+
+/* TOOL SEARCH */
+
+function searchTools(){
+
+  const query=
+    document.getElementById(
+      "toolSearch"
+    )
+    .value
+    .toLowerCase();
+
+  document
+    .querySelectorAll(".tool")
+    .forEach(tool=>{
+
+      tool.style.display=
+        tool.innerText
+        .toLowerCase()
+        .includes(query)
+        ? ""
+        : "none";
+    });
 }
 
 
-/* SRI LANKA TIME */
+/* LINK SAFETY */
 
-function slTime(){
+async function scanURL(){
 
-out(
-'slOut',
-new Intl.DateTimeFormat(
-'en-GB',
-{
-timeZone:'Asia/Colombo',
-dateStyle:'full',
-timeStyle:'medium'
+  const url=
+    document.getElementById(
+      "scanURL"
+    ).value.trim();
+
+  const status=
+    document.getElementById(
+      "scanStatus"
+    );
+
+  const result=
+    document.getElementById(
+      "scanResult"
+    );
+
+  if(!/^https?:\/\//i.test(url)){
+
+    status.textContent=
+      "ERROR // ENTER A VALID HTTP/HTTPS URL";
+
+    return;
+  }
+
+  result.style.display="none";
+
+  status.textContent=
+    "SCANNING // THREAT INTELLIGENCE...";
+
+  try{
+
+    const response=
+      await fetch(
+        "/api/check-url",
+        {
+          method:"POST",
+          headers:{
+            "Content-Type":
+              "application/json"
+          },
+          body:JSON.stringify({
+            url:url
+          })
+        }
+      );
+
+    const data=
+      await response.json();
+
+    if(!response.ok){
+      throw new Error(
+        data.error||
+        "Scanner unavailable"
+      );
+    }
+
+    result.style.display="block";
+
+    document.getElementById(
+      "scanVerdict"
+    ).textContent=
+      data.verdict==="dangerous"
+      ? "⚠ DANGEROUS"
+      :data.verdict==="suspicious"
+      ? "⚠ SUSPICIOUS"
+      : "✓ NO DETECTIONS";
+
+    document.getElementById(
+      "scanMessage"
+    ).textContent=
+      data.message||"";
+
+    const stats=
+      data.stats||{};
+
+    document.getElementById(
+      "malicious"
+    ).textContent=
+      stats.malicious??0;
+
+    document.getElementById(
+      "suspicious"
+    ).textContent=
+      stats.suspicious??0;
+
+    document.getElementById(
+      "harmless"
+    ).textContent=
+      stats.harmless??0;
+
+    document.getElementById(
+      "undetected"
+    ).textContent=
+      stats.undetected??0;
+
+    document.getElementById(
+      "timeout"
+    ).textContent=
+      stats.timeout??0;
+
+    document.getElementById(
+      "detections"
+    ).textContent=
+      data.detections
+      ?.map(
+        x=>
+          x.engine+
+          " // "+
+          x.result
+      )
+      .join("\n")||
+      "No engine detections returned.";
+
+  }catch(error){
+
+    result.style.display="block";
+
+    document.getElementById(
+      "scanVerdict"
+    ).textContent=
+      "⚠ SCANNER UNAVAILABLE";
+
+    document.getElementById(
+      "scanMessage"
+    ).textContent=
+      error.message+
+      " // No fake SAFE result shown.";
+
+  }finally{
+
+    status.textContent=
+      "SCANNER READY";
+  }
 }
-).format(new Date())
-);
 
+
+/* REAL VISITOR COUNTER */
+
+async function loadVisitors(){
+
+  try{
+
+    const response=
+      await fetch(
+        "https://kod.goatcounter.com/counter/TOTAL.json",
+        {
+          cache:"no-store"
+        }
+      );
+
+    if(!response.ok)
+      throw new Error();
+
+    const data=
+      await response.json();
+
+    document.getElementById(
+      "visitorCount"
+    ).textContent=
+      data.count||"0";
+
+  }catch(e){
+
+    document.getElementById(
+      "visitorCount"
+    ).textContent=
+      "—";
+  }
 }
+
+loadVisitors();
 
 </script>
 
 
-<!-- REAL VISITOR COUNTER -->
+<!-- GOATCOUNTER -->
 
 <script
-data-goatcounter="https://kod.goatcounter.com/count"
-async
-src="//gc.zgo.at/count.js">
-</script>
-
-<script>
-
-(function(){
-
-const el=
-document.getElementById(
-'visitorCount'
-);
-
-async function loadVisitorCount(){
-
-try{
-
-const r=
-await fetch(
-'https://kod.goatcounter.com/counter/TOTAL.json',
-{
-cache:'no-store'
-}
-);
-
-if(!r.ok)
-throw new Error(
-'counter unavailable'
-);
-
-const data=
-await r.json();
-
-el.textContent=
-data.count||'0';
-
-}
-catch(e){
-
-el.textContent='—';
-
-}
-
-}
-
-loadVisitorCount();
-
-})();
-
+  data-goatcounter="https://kod.goatcounter.com/count"
+  async
+  src="//gc.zgo.at/count.js">
 </script>
 
 </body>
