@@ -1,0 +1,145 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#020805">
+<title>KINGDOM OF DEVIL // CYBER HUB</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Orbitron:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--g:#00ff66;--g2:#00c853;--dim:#6b8d79;--bg:#020805;--panel:rgba(1,14,8,.82);--line:rgba(0,255,102,.35)}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:#d9ffe7;font-family:'Share Tech Mono',monospace;overflow-x:hidden}
+a{color:inherit;text-decoration:none}.matrix{position:fixed;inset:0;z-index:-3;background:#020805}.matrix:after{content:"";position:absolute;inset:0;background:radial-gradient(circle at 50% 30%,transparent 0,rgba(0,8,4,.18) 45%,rgba(0,4,2,.88) 100%)}
+.grid{position:fixed;inset:0;z-index:-2;opacity:.18;background-image:linear-gradient(rgba(0,255,102,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(0,255,102,.12) 1px,transparent 1px);background-size:34px 34px}
+header{position:sticky;top:0;z-index:20;height:88px;border-bottom:1px solid var(--line);background:rgba(0,7,4,.9);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;padding:0 6%;box-shadow:0 0 25px rgba(0,255,102,.08)}
+.brand{font-family:Orbitron;font-weight:800;letter-spacing:3px;font-size:21px}.brand span{color:var(--g);text-shadow:0 0 12px var(--g)}
+.online{font-size:12px;letter-spacing:4px;color:var(--g)}.dot{display:inline-block;width:12px;height:12px;border-radius:50%;background:var(--g);box-shadow:0 0 16px var(--g);margin-right:12px;animation:pulse 1.3s infinite}
+@keyframes pulse{50%{opacity:.35;box-shadow:0 0 4px var(--g)}}main{max-width:1100px;margin:auto;padding:0 22px}
+.hero{min-height:780px;display:flex;flex-direction:column;justify-content:center;text-align:center;align-items:center;padding:80px 0 55px}.secure{color:var(--g);letter-spacing:8px;font-size:13px;margin-bottom:42px}.hero h1{font-family:Orbitron;font-size:clamp(48px,10vw,102px);line-height:.96;margin:0;font-weight:800;letter-spacing:2px;text-shadow:0 0 18px rgba(0,255,102,.28)}.hero h1 span{color:var(--g);text-shadow:0 0 28px var(--g)}.sub{color:#789486;letter-spacing:8px;margin:44px 0 30px;font-size:15px}.intro{max-width:760px;color:#88a595;font-size:18px;line-height:2}.cursor{display:inline-block;background:var(--g);width:12px;height:20px;margin-left:8px;vertical-align:middle;animation:blink .8s infinite}@keyframes blink{50%{opacity:0}}
+.btns{width:min(720px,100%);margin-top:45px;display:grid;gap:20px}.btn{border:1px solid var(--line);background:rgba(0,25,12,.32);padding:24px;color:#d9ffe7;letter-spacing:2px;font-size:16px;transition:.2s;box-shadow:inset 0 0 18px rgba(0,255,102,.025)}.btn:hover{border-color:var(--g);box-shadow:0 0 22px rgba(0,255,102,.15);color:var(--g);transform:translateY(-2px)}
+.time{margin-top:55px;color:#607b6b;letter-spacing:5px}.time b{color:var(--g);font-size:18px}
+.terminal{border:1px solid rgba(0,255,102,.28);background:rgba(0,10,5,.7);width:min(680px,100%);padding:26px;text-align:left;margin-top:60px;color:#567566;line-height:1.9;box-shadow:0 0 30px rgba(0,255,102,.05)}.terminal b{color:var(--g)}
+section{padding:70px 0}.section-title{font-family:Orbitron;text-align:center;letter-spacing:4px;font-size:28px;margin:0 0 12px}.section-title span{color:var(--g)}.section-sub{text-align:center;color:#607b6b;margin-bottom:35px}
+.scanner{border:1px solid var(--line);background:var(--panel);padding:28px;box-shadow:0 0 35px rgba(0,255,102,.06)}.scan-input{display:flex;gap:12px}.scan-input input{flex:1;min-width:0;background:#010a06;border:1px solid rgba(0,255,102,.35);color:#bfffd2;padding:19px;font:16px 'Share Tech Mono';outline:none}.scan-input input:focus{border-color:var(--g);box-shadow:0 0 16px rgba(0,255,102,.12)}button{font:600 14px Orbitron;letter-spacing:2px;cursor:pointer;border:1px solid var(--g);background:#031c0d;color:var(--g);padding:0 25px}button:hover{background:#07371a;box-shadow:0 0 18px rgba(0,255,102,.2)}
+.scan-status{min-height:24px;margin:20px 0;color:#779785}.result{display:none;border-top:1px solid rgba(0,255,102,.18);padding-top:22px}.verdict{font-family:Orbitron;font-size:24px;letter-spacing:2px;margin-bottom:10px}.safe{color:var(--g);text-shadow:0 0 12px rgba(0,255,102,.5)}.warn{color:#ffc857;text-shadow:0 0 12px rgba(255,200,87,.25)}.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:20px 0}.stat{border:1px solid rgba(0,255,102,.18);padding:15px;text-align:center;background:#020c06}.stat strong{display:block;font:700 24px Orbitron;color:var(--g)}.stat small{color:#607b6b;letter-spacing:1px}.badge{display:inline-block;border:1px solid var(--g);padding:7px 10px;color:var(--g);font-size:11px;letter-spacing:2px}.detections{margin-top:20px;color:#91aa9b}.det{border-left:2px solid #ffc857;padding:8px 12px;margin:7px 0;background:rgba(255,200,87,.04)}
+.tools{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:15px;align-items:start}.tool{border:1px solid rgba(0,255,102,.22);background:rgba(0,12,6,.76);padding:16px;min-height:0;height:auto}.tool h3{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.tool h3{margin:0 0 10px;color:var(--g);font:600 15px Orbitron;letter-spacing:1px}.tool p{color:#607b6b;font-size:12px;line-height:1.6}.tool textarea,.tool input,.tool select{width:100%;background:#010a06;border:1px solid rgba(0,255,102,.2);color:#c9ffda;padding:10px;margin:5px 0;font:13px 'Share Tech Mono'}.tool button{padding:10px 12px;margin-top:5px;width:100%;font-size:11px}.out{margin-top:9px;color:#9ed8af;white-space:pre-wrap;word-break:break-word;font-size:12px;max-height:160px;overflow:auto}
+.qr-result{max-height:none;text-align:center}
+.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}.card{border:1px solid rgba(0,255,102,.2);padding:25px;background:rgba(0,12,6,.7)}.card h3{color:var(--g);font-family:Orbitron;font-size:15px}.card p,.card li{color:#718b7c;line-height:1.8;font-size:14px}
+footer{border-top:1px solid rgba(0,255,102,.18);padding:45px 20px;text-align:center;color:#4e6b5a;letter-spacing:2px}
+.visitor-box{width:min(520px,100%);margin:28px auto 0;border:1px solid rgba(0,255,102,.28);background:rgba(0,12,6,.72);padding:18px 22px;text-align:center;box-shadow:0 0 24px rgba(0,255,102,.05)}.visitor-label{color:#6f8879;letter-spacing:3px;font-size:11px}.visitor-count{color:var(--g);font:700 25px Orbitron;margin-top:8px;text-shadow:0 0 12px rgba(0,255,102,.5)}.visitor-note{color:#4f6c5a;font-size:10px;margin-top:6px}\n@media(max-width:700px){header{height:72px;padding:0 20px}.brand{font-size:15px;letter-spacing:2px}.online{font-size:9px;letter-spacing:2px}.dot{width:9px;height:9px;margin-right:6px}.hero{min-height:720px;padding-top:55px}.secure{font-size:10px;letter-spacing:4px}.sub{font-size:11px;letter-spacing:4px}.intro{font-size:14px}.scan-input{flex-direction:column}.scan-input button{height:54px}.stats{grid-template-columns:repeat(2,1fr)}.tools{grid-template-columns:1fr;gap:14px}.tool{padding:12px}.tool h3{font-size:11px;letter-spacing:.7px}.tool p{font-size:10px;line-height:1.45}.tool textarea,.tool input,.tool select{padding:8px;font-size:11px}.tool button{padding:8px 6px;font-size:9px}.out{font-size:10px}.cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<canvas class="matrix" id="matrix"></canvas><div class="grid"></div>
+<header><div class="brand">KINGDOM <span>OF DEVIL</span></div><div class="online"><i class="dot"></i>SYSTEM ONLINE</div></header>
+<main>
+<section class="hero" id="home">
+<div class="secure">&gt; SECURE CONNECTION ESTABLISHED</div>
+<h1>KINGDOM <span>OF</span><br><span>DEVIL</span></h1>
+<div class="sub">CYBER COMMUNITY // OFFICIAL</div>
+<div class="intro">Welcome to the Kingdom of Devil Cyber Hub. Explore community links, security utilities, developer tools and useful online resources.<i class="cursor"></i></div>
+<div class="btns">
+<a class="btn" href="https://chat.whatsapp.com/JfGHL2gvtrm0r6zR8BLBD3">[+] JOIN INTERVIEW GROUP</a>
+<a class="btn" href="https://whatsapp.com/channel/0029VaiJsCOFXUud9s3vdk0P">[+] FOLLOW OFFICIAL CHANNEL</a>
+<a class="btn" href="#tools">[&gt;] OPEN CYBER TOOLS</a>
+</div>
+<div class="time">SRI LANKA TIME // <b id="clock">--:--:--</b></div>
+<div class="terminal"><b>root@kingdom:~$</b> system_check --status<br>[+] Network ........ ONLINE<br>[+] Security ....... ACTIVE<br>[+] Tools .......... READY<br>[+] Kingdom ........ ONLINE</div>
+<div class="visitor-box"><div class="visitor-label">◉ TOTAL SITE VISITORS</div><div class="visitor-count" id="visitorCount">---</div><div class="visitor-note">REAL VISITOR COUNT</div></div>
+</section>
+
+<section id="scanner"><h2 class="section-title">🔗 LINK <span>SAFETY CHECKER</span></h2><div class="section-sub">&gt; CHECK SCAM / PHISHING / MALICIOUS LINK</div>
+<div class="scanner"><div class="scan-input"><input id="url" type="url" placeholder="https://example.com" autocomplete="off"><button id="scanBtn">CHECK LINK</button></div>
+<div class="scan-status" id="scanStatus">THREAT INTELLIGENCE // READY</div>
+<div class="result" id="result"><div id="verdict" class="verdict"></div><div id="message"></div><br><span class="badge" id="source">THREAT INTELLIGENCE</span>
+<div class="stats"><div class="stat"><strong id="mal">—</strong><small>MALICIOUS</small></div><div class="stat"><strong id="sus">—</strong><small>SUSPICIOUS</small></div><div class="stat"><strong id="har">—</strong><small>HARMLESS</small></div><div class="stat"><strong id="und">—</strong><small>UNDETECTED</small></div><div class="stat"><strong id="tim">—</strong><small>TIMEOUT</small></div></div>
+<div id="local"></div><div class="detections" id="detections"></div></div></div></section>
+
+<section id="tools"><h2 class="section-title">CYBER <span>TOOLS</span></h2><div class="section-sub">&gt; LOCAL UTILITIES // NO FAKE FEATURES</div>
+<div class="tools">
+<div class="tool"><h3>QR GENERATOR</h3><p>Generate a QR from text or URL.</p><input id="qrText" placeholder="Text / URL"><button onclick="qr()">GENERATE QR</button><div id="qrout" class="out qr-result"></div></div>
+<div class="tool"><h3>PASSWORD GENERATOR</h3><p>Create a random strong password.</p><input id="plen" type="number" value="18" min="6" max="64"><button onclick="genPass()">GENERATE</button><div id="pout" class="out"></div></div>
+<div class="tool"><h3>PASSWORD STRENGTH</h3><input id="pw" type="password" placeholder="Enter password"><button onclick="strength()">CHECK</button><div id="sw" class="out"></div></div>
+<div class="tool"><h3>TEXT CASE</h3><textarea id="caseIn" placeholder="Enter text"></textarea><button onclick="caseText('upper')">UPPERCASE</button><button onclick="caseText('lower')">lowercase</button><button onclick="caseText('title')">Title Case</button><div id="caseOut" class="out"></div></div>
+<div class="tool"><h3>TEXT COUNTER</h3><textarea id="countIn" oninput="countText()" placeholder="Type here"></textarea><div id="countOut" class="out">0 chars // 0 words // 0 lines</div></div>
+<div class="tool"><h3>DUPLICATE REMOVER</h3><textarea id="dupIn" placeholder="One item per line"></textarea><button onclick="dedup()">REMOVE DUPLICATES</button><div id="dupOut" class="out"></div></div>
+<div class="tool"><h3>FANCY TEXT</h3><input id="fancyIn" placeholder="Enter text"><button onclick="fancy()">GENERATE STYLE</button><div id="fancyOut" class="out"></div></div>
+<div class="tool"><h3>COLOR CONVERTER</h3><input id="colorIn" placeholder="#00ff66"><button onclick="colorConv()">CONVERT</button><div id="colorOut" class="out"></div></div>
+<div class="tool"><h3>BASE64</h3><textarea id="b64In" placeholder="Text"></textarea><button onclick="b64('e')">ENCODE</button><button onclick="b64('d')">DECODE</button><div id="b64Out" class="out"></div></div>
+<div class="tool"><h3>URL ENCODER / DECODER</h3><textarea id="urlIn" placeholder="Text or URL"></textarea><button onclick="urlCode('e')">ENCODE</button><button onclick="urlCode('d')">DECODE</button><div id="urlOut" class="out"></div></div>
+<div class="tool"><h3>JSON FORMATTER</h3><textarea id="jsonIn" placeholder='{"hello":"world"}'></textarea><button onclick="jsonFmt()">FORMAT JSON</button><div id="jsonOut" class="out"></div></div>
+<div class="tool"><h3>RANDOM PICKER</h3><textarea id="pickIn" placeholder="One choice per line"></textarea><button onclick="pick()">PICK RANDOM</button><div id="pickOut" class="out"></div></div>
+<div class="tool"><h3>RANDOM NUMBER</h3><input id="min" type="number" value="1"><input id="max" type="number" value="100"><button onclick="rand()">GENERATE</button><div id="randOut" class="out"></div></div>
+<div class="tool"><h3>BROWSER INFO</h3><button onclick="browserInfo()">SHOW INFO</button><div id="browserOut" class="out"></div></div>
+<div class="tool"><h3>SRI LANKA TIME</h3><button onclick="slTime()">REFRESH TIME</button><div id="slOut" class="out"></div></div>
+</div></section>
+
+<section><h2 class="section-title">OUR <span>KINGDOM</span></h2><div class="cards"><div class="card"><h3>COMMUNITY</h3><p>Kingdom of Devil is a community built around friendship, entertainment, creativity and a strong dark-cyber identity.</p></div><div class="card"><h3>INTERVIEW ZONE</h3><p>Our interview group is the place for new-member introductions, community activities and Kingdom-related discussions.</p></div><div class="card"><h3>01 // RESPECT</h3><p>Respect members and keep conversations under control.</p></div><div class="card"><h3>02 // NO SPAM</h3><p>Avoid flooding the group with unwanted messages or links.</p></div></div></section>
+</main><footer>KINGDOM OF DEVIL // CYBER COMMUNITY // SYSTEM ONLINE</footer>
+<script>
+const c=document.getElementById('matrix'),x=c.getContext('2d');
+let fs=17,cols,drops;
+const matrixChars='01ABCDEFGHIJKLMNOPQRSTUVWXYZ<>[]{}#$%KOD';
+function resize(){c.width=innerWidth;c.height=innerHeight;cols=Math.ceil(c.width/fs);drops=Array.from({length:cols},()=>Math.random()*-40)}
+resize();addEventListener('resize',resize);
+setInterval(()=>{
+  x.fillStyle='rgba(2,8,5,.09)';x.fillRect(0,0,c.width,c.height);
+  x.font=fs+'px Share Tech Mono';
+  for(let i=0;i<drops.length;i++){
+    const ch=matrixChars[Math.floor(Math.random()*matrixChars.length)];
+    x.fillStyle=Math.random()>.94?'rgba(170,255,205,.75)':'rgba(0,255,102,.18)';
+    x.fillText(ch,i*fs,drops[i]*fs);
+    if(drops[i]*fs>c.height && Math.random()>.975)drops[i]=Math.random()*-20;
+    drops[i]++;
+  }
+},55);
+
+function tick(){document.getElementById('clock').textContent=new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',hour:'2-digit',minute:'2-digit',second:'2-digit',hour12:false}).format(new Date())}tick();setInterval(tick,1000);
+const $=id=>document.getElementById(id),out=(id,v)=>$(id).textContent=v;
+async function scan(){let u=$('url').value.trim();if(!/^https?:\/\//i.test(u)){out('scanStatus','ERROR // ENTER A VALID HTTP/HTTPS URL');return}$('result').style.display='none';out('scanStatus','SCANNING // THREAT INTELLIGENCE ANALYSIS...');$('scanBtn').disabled=true;
+try{let r=await fetch('/api/check-url',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:u})});let d=await r.json();if(!r.ok)throw Error(d.error||'Scanner backend unavailable');$('result').style.display='block';$('verdict').textContent=d.verdict==='dangerous'?'⚠ DANGEROUS':d.verdict==='suspicious'?'⚠ SUSPICIOUS':'✓ NO DETECTIONS';$('verdict').className='verdict '+(d.verdict==='safe'?'safe':'warn');out('message',d.message||'');out('source',String(d.source||'THREAT INTELLIGENCE').toUpperCase());let s=d.stats||{};out('mal',s.malicious??0);out('sus',s.suspicious??0);out('har',s.harmless??0);out('und',s.undetected??0);out('tim',s.timeout??0);let ds=d.detections||[];$('detections').innerHTML=ds.length?'<b>DETECTIONS</b>'+ds.map(a=>`<div class="det">${escapeHtml(a.engine)} // ${escapeHtml(a.result)} // ${escapeHtml(a.category)}</div>`).join(''):'<span>No engine detections returned.</span>';$('local').innerHTML=d.localIndicators?.length?'<p><b>LOCAL INDICATORS</b></p>'+d.localIndicators.map(a=>`<div class="det">${escapeHtml(a)}</div>`).join(''):''}catch(e){$('result').style.display='block';$('verdict').textContent='⚠ SCANNER UNAVAILABLE';$('verdict').className='verdict warn';out('message',e.message+' // No fake SAFE result is shown.');out('source','BACKEND OFFLINE');['mal','sus','har','und','tim'].forEach(id=>out(id,'—'));$('detections').innerHTML='';$('local').innerHTML=''}finally{$('scanBtn').disabled=false;out('scanStatus','THREAT INTELLIGENCE // READY')}}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}$('scanBtn').onclick=scan;$('url').addEventListener('keydown',e=>{if(e.key==='Enter')scan()});
+function qr(){
+let t=$('qrText').value.trim();
+let box=$('qrout');
+if(!t){box.innerHTML='<span style=\"color:#ffc857\">Enter text or URL first.</span>';return;}
+let src='https://api.qrserver.com/v1/create-qr-code/?size=260x260&margin=10&data='+encodeURIComponent(t);
+box.innerHTML='<img src=\"'+src+'\" alt=\"Generated QR Code\" style=\"display:block;width:220px;height:220px;margin:12px auto;background:#fff;padding:8px;border:1px solid rgba(0,255,102,.35)\" onerror=\"this.parentElement.innerHTML=\'<span style=\"color:#ffc857\">QR service unavailable. Check your internet connection.</span>\'\"><div style=\"margin-top:8px;text-align:center;word-break:break-all\">QR READY // '+escapeHtml(t)+'</div>';
+}
+function genPass(){let n=Math.max(6,Math.min(64,+$('plen').value||18)),chars='ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz23456789!@#$%^&*_-+=',a='';crypto.getRandomValues(new Uint32Array(n)).forEach(v=>a+=chars[v%chars.length]);out('pout',a)}
+function strength(){let p=$('pw').value,s=0;if(p.length>=8)s++;if(p.length>=14)s++;if(/[A-Z]/.test(p))s++;if(/[a-z]/.test(p))s++;if(/\d/.test(p))s++;if(/[^A-Za-z0-9]/.test(p))s++;out('sw',['VERY WEAK','WEAK','FAIR','GOOD','STRONG','VERY STRONG','VERY STRONG'][s])}
+function caseText(m){let t=$('caseIn').value;out('caseOut',m==='upper'?t.toUpperCase():m==='lower'?t.toLowerCase():t.toLowerCase().replace(/\b\w/g,a=>a.toUpperCase()))}
+function countText(){let t=$('countIn').value;out('countOut',`${t.length} chars // ${(t.trim().match(/\S+/g)||[]).length} words // ${t?t.split(/\\n/).length:0} lines`)}
+function dedup(){let a=$('dupIn').value.split(/\r?\n/),r=[...new Set(a.map(v=>v.trim()).filter(Boolean))];out('dupOut',r.join('\\n'))}
+function fancy(){let t=$('fancyIn').value;out('fancyOut','『 '+t+' 』\\n꧁ '+t+' ꧂\\n⟦ '+t+' ⟧\\n★ '+t+' ★')}
+function colorConv(){let v=$('colorIn').value.trim(),m=v.match(/^#?([0-9a-f]{6})$/i);if(!m)return out('colorOut','Use #RRGGBB');let h=m[1],r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4),16);out('colorOut',`HEX #${h.toUpperCase()}\\nRGB rgb(${r}, ${g}, ${b})`)}
+function b64(m){try{out('b64Out',m==='e'?btoa(unescape(encodeURIComponent($('b64In').value))):decodeURIComponent(escape(atob($('b64In').value))))}catch(e){out('b64Out','Invalid Base64')}}
+function urlCode(m){try{out('urlOut',m==='e'?encodeURIComponent($('urlIn').value):decodeURIComponent($('urlIn').value))}catch(e){out('urlOut','Invalid encoded text')}}
+function jsonFmt(){try{out('jsonOut',JSON.stringify(JSON.parse($('jsonIn').value),null,2))}catch(e){out('jsonOut','Invalid JSON')}}
+function pick(){let a=$('pickIn').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean);out('pickOut',a.length?a[Math.floor(Math.random()*a.length)]:'No choices')}
+function rand(){let a=+$('min').value,b=+$('max').value;out('randOut',String(Math.floor(Math.random()*(Math.max(a,b)-Math.min(a,b)+1))+Math.min(a,b)))}
+function browserInfo(){out('browserOut',`UA: ${navigator.userAgent}\\nLANG: ${navigator.language}\\nSCREEN: ${screen.width}x${screen.height}\\nONLINE: ${navigator.onLine}`)}
+function slTime(){out('slOut',new Intl.DateTimeFormat('en-GB',{timeZone:'Asia/Colombo',dateStyle:'full',timeStyle:'medium'}).format(new Date()))}
+</script>
+
+<!-- REAL VISITOR COUNTER - GoatCounter -->
+<script data-goatcounter="https://kod.goatcounter.com/count"
+        async src="//gc.zgo.at/count.js"></script>
+<script>
+(function () {
+  const el = document.getElementById('visitorCount');
+  async function loadVisitorCount() {
+    try {
+      const r = await fetch('https://kod.goatcounter.com/counter/TOTAL.json', {cache:'no-store'});
+      if (!r.ok) throw new Error('counter unavailable');
+      const data = await r.json();
+      el.textContent = data.count || '0';
+    } catch (e) {
+      el.textContent = '—';
+    }
+  }
+  loadVisitorCount();
+})();
+</script>
+</body></html>
